@@ -41,17 +41,6 @@ Route::group(['middleware' => ['check_login_admin'] , 'as' => 'admin.'], functio
         Route::delete('/delete/{id}', [CategoryController::class, 'destroy'])->name('destroy');
     });
 
-    // route for module Post
-	Route::group(['prefix' => 'post', 'as' => 'post.'], function () {
-        Route::get('/list', [PostController::class, 'index'])->name('index');
-        Route::get('/create', [PostController::class, 'create'])->name('create');
-        Route::post('/store', [PostController::class, 'store'])->name('store');
-        Route::get('/show/{id}', [PostController::class, 'show'])->name('show');
-        Route::get('/edit/{id}', [PostController::class, 'edit'])->name('edit');
-        Route::put('/update/{id}', [PostController::class, 'update'])->name('update');
-        Route::delete('/delete/{id}', [PostController::class, 'destroy'])->name('destroy');
-    });
-
     // route for module Product
     Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
         Route::get('/list', [ProductController::class, 'index'])->name('index');

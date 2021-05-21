@@ -6,7 +6,7 @@
     </div>
 
     <div class="mb-3">
-    <!-- Authentication -->
+        <!-- Authentication -->
         <form method="POST" action="{{ route('logout') }}">
             @csrf
 
@@ -16,7 +16,7 @@
     </div>
 @endauth
 
-@guest  
+@guest
     {{-- not login --}}
     <a href="{{ route('login') }}">Login</a>
 @endguest

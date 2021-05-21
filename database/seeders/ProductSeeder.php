@@ -81,7 +81,7 @@ class ProductSeeder extends Seeder
 
         $quantities = [5, 10, 15, 20, 50, 100, 200];
 
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $product = [
                 'name' => $listProductNames[array_rand($listProductNames)],
                 'description' => $listProductDescriptions[array_rand($listProductDescriptions)],

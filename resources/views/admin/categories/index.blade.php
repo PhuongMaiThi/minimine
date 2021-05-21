@@ -40,7 +40,7 @@
             <tr>
                 <th>#</th>
                 <th>Category Name</th>
-                <th>List Post</th>
+                <th>List Product</th>
                 <th colspan="3">Action</th>
             </tr>
         </thead>
@@ -50,7 +50,7 @@
                     <tr>
                         <td>{{ $key+1 }}</td>
                         <td>{{ $category->name }}</td>
-                        <td><a href="{{ route('admin.post.index', ['category_id' => $category->id]) }}">View List Category</a></td>
+                        <td><a href="{{ route('admin.product.index', ['category_id' => $category->id]) }}">View List Product</a></td>
                         <td><a href="{{ route('admin.category.show', $category->id) }}">Detail</a></td>
                         <td><a href="{{ route('admin.category.edit', $category->id) }}">Edit</a></td>
                         <td>

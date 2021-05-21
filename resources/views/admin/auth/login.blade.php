@@ -12,6 +12,10 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <style>
+body{
+    padding: 150px;
+    background-image: url("https://c.pxhere.com/photos/c2/cb/clover_the_background_green_grass_wallpaper_background_meadow_plant-604917.jpg!d");
+}
 .login-form {
     width: 340px;
     margin: 50px auto;
@@ -19,7 +23,7 @@
 }
 .login-form form {
     margin-bottom: 15px;
-    background: #f7f7f7;
+    background: #c5e079;
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
     padding: 30px;
 }
@@ -37,10 +41,12 @@
 </style>
 </head>
 <body>
+    <div class="container">
 <div class="login-form">
     <form action="{{ route('admin.login.handle') }}" method="post">
     	{!! csrf_field() !!}
-        <h2 class="text-center">Log in</h2>
+        <h2 class="text-center">Đăng nhập 
+            Minimize Garden</h2>
         @if(\Session::get('success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ \Session::get('success') }}
@@ -75,9 +81,10 @@
             @endif
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block">Log in</button>
+            <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
         </div>      
     </form>
+</div>
 </div>
 </body>
 </html>
