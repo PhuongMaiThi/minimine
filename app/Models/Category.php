@@ -16,4 +16,10 @@ class Category extends Model
     {
         return $this->hasMany(Product::class);
     }
+    
+    public function limitProducts()
+    {
+        return $this->hasMany(Product::class)
+            ->take(8);
+    }
 }

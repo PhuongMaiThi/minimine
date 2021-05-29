@@ -4,10 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
     use HasFactory;
+
+    use SoftDeletes;
 
     protected $fillable = [
         'name',
@@ -17,6 +20,7 @@ class Product extends Model
         'quantity',
         'is_feature',
         'category_id',
+        'price',
     ];
     //relationship to category
     public function category()
@@ -28,17 +32,18 @@ class Product extends Model
     {
         return $this->hasOne(ProductDetail::class);
     }
-    //relationship to price
-    public function prices()
-    {
-        return $this->hasMany(Price::class);
+    
+    public function product_images(){
+        return $this->hasMany(ProductImage::class);
     }
     
     public function latestPrice()
     {
+        $currentdate = date('Y-m-01 H:i:s');
+
         return $this->hasOne(Price::class)
-            ->where('begin_date', '<=', date('Y-m-d 00:00:00'))
-            ->where('end_date', '>=', date('Y-m-d 00:00:00'))
-            ->take(1);
+            ->where('end_date', '>=', $currentdate)
+            ->where('status', Price::STATUS[1])
+            ->first();
     }
 }

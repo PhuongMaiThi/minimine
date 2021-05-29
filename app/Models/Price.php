@@ -23,4 +23,6 @@ class Price extends Model
         0, // Private
         1, // Public 
     ];
+
+   
 }

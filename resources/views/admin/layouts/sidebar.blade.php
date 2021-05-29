@@ -113,7 +113,7 @@
         </li>
 
         {{-- menu of order module --}}
-        @php
+        {{-- @php
           $routeOrderArr = [
             'admin.order.index',
             'admin.order.edit',
@@ -137,7 +137,39 @@
             </li>
           </ul>
         </li>
-      </ul>
+      </ul> --}}
+
+      {{-- menu of user module --}}
+      {{-- @php
+        $routeProductArr = [
+          'admin.user.index',
+          'admin.user.create',
+          'admin.user.edit',
+        ];
+      @endphp
+      <li class="nav-item {{ in_array(Route::currentRouteName(), $routeProductArr) ? 'menu-open' : '' }}">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-copy"></i>
+          <p>
+            User
+            <i class="fas fa-angle-left right"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a href="{{ route('admin.user.index') }}" class="nav-link {{ Route::currentRouteName() == 'admin.user.index' ? 'active' : '' }}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>List User</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('admin.user.create') }}" class="nav-link {{ Route::currentRouteName() == 'admin.user.create' ? 'active' : '' }}">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Create User</p>
+            </a>
+          </li>
+        </ul>
+      </li> --}}
 
       <form action="{{ route('admin.logout') }}" method="POST">
         @csrf
