@@ -29,26 +29,39 @@
                         </div>
                         
                         <div class="header__top__right__language">                          
-                            <img src="#" alt="">
-                            <div>Login</div>
-                            <span class="arrow_carrot-down"></span>
-                            <ul>
+                            @guest
+                                <img src="#" alt="">
+                                <div>Login</div>
+                                <span class="arrow_carrot-down"></span>
+                                <ul>
                                 <li><a class="dropdown-item" href="{{ route('login') }}">Đăng nhập</a></li>
-                                       <li>
-                                          <hr class="dropdown-divider">
-                                       </li>
-                                <li><a class="dropdown-item" href="{{ route('register') }}">Tạo tài khoản</a></li>
                                 <li>
-                                    <form action="{{ route('logout') }}" method="POST">
+                                <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="{{ route('register') }}">Tạo tài khoản</a></li>
+                                </ul> 
+                            @endguest 
+                                
+                            @auth
+                                <div><p>{{ Auth::user()->name }}</p></div>
+                                <span class="arrow_carrot-down"></span>
+                                <ul>
+                                    <li>
+                                        <form action="{{ route('logout') }}" method="POST">
                                         @csrf
                                         <button type="submit"><i class="far fa-sign-out-alt"></i><span class="text">Logout</span></button>
-                                    </form>
-                                </li>
-                            </ul>                           
+                                        </form>
+                                    </li>
+                                    <li>
+                                        <form action="#" method="POST">
+                                        @csrf
+                                        <button type="submit"><i class="far fa-sign-out-alt"></i><span class="text">Lịch sử mua hàng</span></button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            @endauth                          
                         </div>
-                        {{-- <div class="header__top__right__language"><p><a href="{{route('register')}}">Register</a></p>
-                        </div> --}}
-                        {{-- <div><span class="arrow_carrot-down"></span><span class="text"> </span><span>{{ Auth::user()->name }}</span> --}}
+                       
                         </div>
                     </div>
                 </div>

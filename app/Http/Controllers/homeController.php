@@ -13,20 +13,9 @@ class homeController extends Controller
         //dd(123);
         $data=[];
         $category = Category::get();
-        // foreach ($category->products as $product) {
-        //         $product->latestPrice();
-        //     }
-        //     $category = Category::get();
-        //     $arrCategories = $category->toArray();
-        //     if (!empty($category)) {
-        //         foreach ($category as $key => $category) {
-        //             $products = $category->limitProducts();
-        //             // dd($products);
-        //             $arrCategories[$key]['products'] = $products;
-        //         }
-        //     }
 
         $data['category'] = $category;
+        $data['hotProducts'] = Product::paginate(8);
         return view('welcome', $data);
     }
 }
