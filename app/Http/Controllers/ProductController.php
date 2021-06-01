@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Models\Product;
 use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
@@ -20,4 +20,3 @@ class ProductController extends Controller
         return view('products.detail', $data);
     }
 }
-

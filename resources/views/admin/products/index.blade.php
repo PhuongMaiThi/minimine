@@ -24,11 +24,8 @@
     @include('admin.products._search')
 
     {{-- create product link --}}
-    {{-- case 1 --}}
     <p><a href="{{ route('admin.product.create') }}" class="btn btn-primary" title="Create Product">Create</a></p>
-    
-    {{-- case 2 --}}
-    {{-- <p><a href="/product/create">Create</a></p> --}}
+  
 
     {{-- show message --}}
     @if(Session::has('success'))

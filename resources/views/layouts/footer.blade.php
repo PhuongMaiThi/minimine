@@ -3,8 +3,8 @@
         <div class="row">
             <div class="col-lg-4 col-md-6 col-sm-6">
                 <div class="footer__about">
-                    <div class="footer__about__logo">
-                        <a href="./index.html"><img src="frontend/img/LOGO1.png" alt=""></a>
+                    <div class="col-lg-8">
+                        <a href="/"><img src="frontend/img/LOGO1.png" alt=""></a>
                     </div>
                     <ul>
                         <li>Address: 140 Phùng Chí Kiên, Đà Nẵng</li>

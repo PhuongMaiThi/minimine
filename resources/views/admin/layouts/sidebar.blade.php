@@ -113,7 +113,7 @@
         </li>
 
         {{-- menu of order module --}}
-        {{-- @php
+        @php
           $routeOrderArr = [
             'admin.order.index',
             'admin.order.edit',
@@ -137,7 +137,7 @@
             </li>
           </ul>
         </li>
-      </ul> --}}
+      </ul>
 
       {{-- menu of user module --}}
       {{-- @php

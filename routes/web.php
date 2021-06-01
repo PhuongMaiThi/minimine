@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\homeController;
+use App\Http\Controllers\ProductController;
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,12 +36,12 @@ Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
 });
 
 Route::group(['prefix' => 'cart', 'as' => 'cart.'], function () {
+    Route::post('cart/{id}', [CartController::class, 'addCart'])->name('add')->middleware(['auth']);
     Route::get('/', [CartController::class, 'getCartInfo'])->name('cart-info')->middleware('check_order_step_by_step'); 
-    Route::post('cart/{id}', [CartController::class, 'addCart'])->name('add-cart');
-    Route::get('checkout', [CartController::class, 'checkout'])->name('checkout')->middleware('check_order_step_by_step');
-    Route::post('checkout-complete', [CartController::class, 'checkoutComplete'])->name('checkout-complete');
-    Route::post('send-verify-code', [CartController::class, 'sendVerifyCode'])->middleware(['auth'])->name('send-verify-code');
-    Route::post('confirm-verify-code', [CartController::class, 'confirmVerifyCode'])->middleware(['auth'])->name('confirm-verify-code');
+    Route::get('checkout', [CartController::class, 'checkout'])->name('checkout');
+    Route::post('checkout-complete', [CartController::class, 'checkoutComplete'])->name('checkout-complete')->middleware(['auth']);
+    Route::delete('/delete/{id}', [CartController::class, 'destroy'])->name('destroy')->middleware(['auth']);
+
 });
 
 

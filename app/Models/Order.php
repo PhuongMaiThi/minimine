@@ -23,14 +23,15 @@ class Order extends Model
      * 4: (finished) Hoàn thành
      */
     public const STATUS = [
-        0,
-        1,
-        2,
-        3,
-        4,
+        0, /* chua thanh toan */
+        1, /* thanh toan ma chua tra tien */
+        2, /** */
+        3, /** */
+        4, /** */
     ];
 
     protected $fillable = [
+        
         'user_id',
         'status',
     ];

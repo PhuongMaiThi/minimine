@@ -72,14 +72,14 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="header__logo">
-                    <a href="./index.html"><img src="frontend/img/LOGO1.png" alt=""></a>
+                    <a href="/"><img src="frontend/img/LOGO1.png" alt=""></a>
                 </div>
             </div>
             <div class="col-lg-7">
                 <div class="row">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="./index.html">Trang chủ</a></li>
+                            <li class="active"><a href="/">Trang chủ</a></li>
                             <li><a href="./shop-grid.html">Giới thiệu</a></li>
                             <li><a href="#">Làm vườn</a>
                                 <ul class="header__menu__dropdown">
@@ -110,8 +110,15 @@
             <div class="col-lg-2">
                 <div class="header__cart">
                     <ul>
-                        <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                        <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                        @php
+                            $cartNumber = 0;
+                            if (Session::has('carts')) {
+                                foreach (Session::get('carts') as $key => $value) {
+                                    $cartNumber += intval($value['quantity']);
+                                }
+                            }
+                        @endphp
+                        <li>Giỏ hàng: <a href="{{ route('cart.cart-info') }}"><i class="fa fa-shopping-bag"></i> <span>{{ $cartNumber }}</span></a></li>
                     </ul>
                 </div>               
             </div>

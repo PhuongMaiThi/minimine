@@ -19,7 +19,7 @@
                         </div>
                         <h6>{{ $product['name'] }}</h6>
                         <div class="product-description">
-                            <h4 clas price>{{ $product['price'] }}.000 VNĐ</h4>
+                            <h4 clas price>{{ number_format($product->price) }} VNĐ</h4>
                         </div>
                         <div class="product-buy">
                             <a href="{{ route('product.detail', $product['id']) }}" class="btn btn-primary">View More</a>

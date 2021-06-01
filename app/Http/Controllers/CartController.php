@@ -6,16 +6,10 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\SendVerifyCode;
 use App\Models\Order;
 use App\Models\OrderDetail;
-use App\Models\OrderVerify;
-use App\Models\Price;
-use App\Utils\CommonUtil;
 use Exception;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class CartController extends Controller
 {
@@ -63,16 +57,15 @@ class CartController extends Controller
             // get data product from list product id
             $dataCart = Product::whereIn('id', $listProductId)
                 ->get();
+            
+                
 
             // add step by step to SESSION
             session(['step_by_step' => 1]);
         }
         $data['products'] = $dataCart;
-
-        return view('carts.card_info', $data);
+        return view('carts.card', $data);
     }
-
-    
 
     public function checkout(Request $request)
     {
@@ -113,12 +106,13 @@ class CartController extends Controller
 
         // create data to save into table orders
         $dataOrder = [
+            // 'product_id' => $carts['id'],
             'user_id' => Auth()->id(),
             'status' => Order::STATUS[0],
         ];
-
+        // dd($dataOrder);
         DB::beginTransaction();
-
+        // dd($dataOrder);
         try {
             // save data into table orders
             $order = Order::create($dataOrder);
@@ -138,6 +132,7 @@ class CartController extends Controller
                     ];
                     // save data into table order_details
                     OrderDetail::create($orderDetail);
+                    
                 }
             }
             
@@ -148,84 +143,30 @@ class CartController extends Controller
 
             return redirect()->route('home')->with('success', 'Your Order was successful!');
         } catch (Exception $exception) {
-            DB::rollBack();
+            // dd(123);
+            echo $exception->getMessage();
+            // DB::rollBack();
 
-            return redirect()->back()->with('error', $exception->getMessage());
+            // return redirect()->back()->with('error', $exception->getMessage());
         }
     }
 
-    public function sendVerifyCode(Request $request)
+    public function destroy(Request $request)
     {
-        // send code to verify Order
-        // check exist send code ?
-        $userId = Auth::id();
-        $email = Auth::user()->email;
-        $currentDate = date('Y-m-d H:i:s');
-        $dateSubtract15Minutes = date('Y-m-d H:i:s', (time() - 60 * 15)); // current - 15 minutes
-        Log::info('dateSubtract15Minutes');
-        Log::info($dateSubtract15Minutes);
-        $orderVerify = OrderVerify::where('user_id', $userId)
-            ->whereBetween('expire_date', [$dateSubtract15Minutes, $currentDate])
-            ->where('status', OrderVerify::STATUS[0])
-            ->first();
+        $id = $request->id;
+        // dd($id);die;
+        $sessionAll = Session::all();
 
-        if (!empty($orderVerify)) { // already sent code and this code is available
-            return response()->json(['message' => 'We sent code to your email about 15 minutes ago. Please check email to get code.']);
-        } else { // not send code
-            $dataSave = [
-                'user_id' => $userId,
-                'status'  => OrderVerify::STATUS[0], // default 0
-                'code'  => CommonUtil::generateUUID(),
-                'expire_date'  => $currentDate,
-            ];
-            DB::beginTransaction();
+        $carts = empty($sessionAll['carts']) ? [] : $sessionAll['carts'];
+        if (!empty($carts[$id])) {
 
-            try {
-                OrderVerify::create($dataSave);
-
-                // commit insert data into table
-                DB::commit();
-
-                // send code to email
-                Mail::to($email)->send(new SendVerifyCode($dataSave));
-
-                return response()->json(['message' => 'We sent code to email. Please check email to get code.']);
-            } catch (\Exception $exception) {
-                // rollback data and dont insert into table
-                DB::rollBack();
-
-                return response()->json(['message' => $exception->getMessage()]);
-            }
+            unset($carts[$id]);
+            
+            session()->put('carts', $carts);
+            
+            return redirect()->back()->with(['message' => 'success']);
         }
-    }
-
-    public function confirmVerifyCode(Request $request)
-    {
-        $code = $request->code;
-        $userId = Auth::id();
-
-        $orderVerify = OrderVerify::where('code', $code)
-            ->where('user_id', $userId)
-            ->where('status', OrderVerify::STATUS[0])
-            ->first();
-        //  validate code
-
-        DB::beginTransaction();
-
-        try {
-            $orderVerify->status = OrderVerify::STATUS[1];
-            $orderVerify->save();
-
-            DB::commit();
-
-            // add step by step to SESSION
-            session(['step_by_step' => 2]);
-
-            return response()->json(['message' => 'Confirmed code is OK.']);
-        } catch (\Exception $exception) {
-            DB::rollBack();
-
-            return response()->json(['message' => $exception->getMessage()]);
-        }
+        
+        return redirect()->back()->with(['message' => 'failed']);
     }
 }

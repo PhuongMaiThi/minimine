@@ -18,6 +18,7 @@ class CreateProductImagesTable extends Migration
             $table->string('url');
             $table->unsignedBigInteger('product_id');
             $table->timestamps();
+            // $table->softDeletes();
         });
     }
 

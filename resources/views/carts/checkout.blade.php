@@ -1,7 +1,3 @@
-{{-- @extends('layouts.master')
-
-@section('title','Sample') --}}
-
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
@@ -24,50 +20,29 @@
     <link rel="stylesheet" href="frontend/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="frontend/css/style.css" type="text/css">
 </head>
-
 <body>
-
     <!-- Header Section Begin -->
     @include('layouts.header')
     <!-- Header Section End -->
-
-    <!-- Hero Section Begin -->
-    @include('layouts.search')
-    <!-- Hero Section End -->
-
- <!-- Categories Section Begin -->
-@include('layouts.welcome.categories')
-<!-- Categories Section End -->
-
-<!-- Featured Section Begin -->
-@include('layouts.welcome.feature')
-<!-- Featured Section End -->
-
-<!-- Banner Begin -->
-@include('layouts.welcome.banner')
-<!-- Banner End -->
-
-<!-- Latest Product Section Begin -->
-@include('layouts.welcome.lastest_product')
-<!-- Latest Product Section End -->
-
-<!-- Blog Section Begin -->
-@include('layouts.welcome.blog')
-<!-- Blog Section End -->  
-
-<!-- Footer Section Begin -->
+<div class="container">
+    <section class="checkout">
+        <div class="row">
+            <div class="col-4">
+                {{-- thong tin don hang --}}
+                @include('carts.parts.cart_info')
+            </div>
+            <div class="col-4">
+                {{-- thong tin ca nhan --}}
+                @include('carts.parts.personal_info')
+            </div>
+            <div class="col-4">
+                {{-- thong tin thanh toan --}}
+                @include('carts.parts.payment_info')
+            </div>
+        </div>
+    </section>  
+</div>
+<div class="row"><hr></div>
+{{-- footer --}}
 @include('layouts.footer')
-<!-- Footer Section End -->
-
-    <!-- Js Plugins -->
-    <script src="frontend/js/jquery-3.3.1.min.js"></script>
-    <script src="frontend/js/bootstrap.min.js"></script>
-    <script src="frontend/js/jquery.nice-select.min.js"></script>
-    <script src="frontend/js/jquery-ui.min.js"></script>
-    <script src="frontend/js/jquery.slicknav.js"></script>
-    <script src="frontend/js/mixitup.min.js"></script>
-    <script src="frontend/js/owl.carousel.min.js"></script>
-    <script src="frontend/js/main.js"></script>
-</body>
-
-</html>
+{{-- end footer --}}
