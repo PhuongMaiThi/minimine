@@ -10,6 +10,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Requests;
 use App\Models\Admin;
+use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -91,4 +92,5 @@ class AuthController extends Controller
         \Session::put('success','You are logout successfully');        
         return redirect(route('admin.login'));
     }
+    
 }

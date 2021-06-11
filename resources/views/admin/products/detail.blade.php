@@ -34,7 +34,7 @@
                         <h2>{{$product->name}}</h2>
                     </div>
                     <div>
-                        <h4>Price: {{$product->price}}.000 VNĐ</h4>
+                        <h4>Price: {{ number_format($product->price)}} VNĐ</h4>
                     </div>
                     <div class="product-description">
                         <h4> Description: </h4>

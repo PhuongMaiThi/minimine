@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('thumbnail');
             $table->boolean('status')->default(1);
             $table->integer('quantity');
+            // $table->string('price');
             $table->boolean('is_feature')->default(0);
             $table->unsignedBigInteger('category_id');
             $table->timestamps();

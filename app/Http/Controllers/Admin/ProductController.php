@@ -42,7 +42,7 @@ class ProductController extends Controller
         }
         
         //phan Trang
-        $products = $products->paginate(4);
+        $products = $products->paginate(8);
        
         $categories = Category::pluck('name', 'id')
             ->toArray();

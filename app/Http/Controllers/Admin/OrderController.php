@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\Product;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,8 +21,6 @@ class OrderController extends Controller
     public function index()
     {
         $data = [];
-
-        // get orders
         $orders = Order::with('orderDetails')
             ->with('user')
             ->paginate(self::RECORD_LIMIT);
@@ -63,10 +62,12 @@ class OrderController extends Controller
         $data = [];
 
         // get orders
-        $orders = Order::with('orderDetails')
+        $order = Order::with('orderDetails')
             ->with('user')
-            ->paginate(self::RECORD_LIMIT);
-        $data['orders'] = $orders;
+            ->findOrFail($id);
+        $data['order'] = $order;
+
+        // dd($order);
 
         return view('admin.orders.detail', $data);
     }
@@ -113,6 +114,26 @@ class OrderController extends Controller
             DB::rollback();
 
             return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+    public function destroy($id)
+    {
+         // Method: DELETE
+        DB::beginTransaction();
+
+        try {
+            $order = Order::find($id);
+            $order->delete();
+
+            DB::commit();
+
+            return redirect()->route('admin.order.index')
+                ->with('success', 'Delete Order successful!');
+        }  catch (\Exception $ex) {
+            DB::rollBack();
+            // have error so will show error message
+            return redirect()->back()->with('error', $ex->getMessage());
         }
     }
 

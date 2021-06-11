@@ -31,7 +31,7 @@
     <table id="product-list" class="table table-bordered table-hover table-striped">
         <thead>
             <tr>
-                <th>#</th>
+                <th>STT</th>
                 <th>Fullname</th>
                 <th>Total Quantity</th>
                 <th>Total Money</th>
@@ -51,7 +51,7 @@
                                 $totalQuantity += $od->quantity;
     
                                 // get price
-                                $productPrice = $od->price->price;
+                                $productPrice = $od->price;
                                 $totalMoney += $od->quantity * $productPrice;
                             }
                         }

@@ -18,6 +18,10 @@ class Admin extends Authenticatable
 
     protected $table = 'admins';
     
+    const ROLE_ADMIN = 1;
+    const ROLE_EDITER = 2;
+    const ROLE_SHIPPER = 3;
+    
     protected $guarded = [];
 
     protected $fillable = [

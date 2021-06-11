@@ -9,7 +9,8 @@
             <input type="radio" value="2" name="payment_type" id="payment-type-2" class="payment-type">
             <label for="payment-type-2">Thanh toán bằng Credit Card</label>
         </div>
-        <div class="form-group" id="payment-info">
+     
+        {{-- <div class="form-group" id="payment-info">
             <div class="border p-2">
                 <div class="form-group mb-2">
                     <label for="">Credit Card Number</label>
@@ -24,9 +25,7 @@
                     <input type="number" value="" name="cc_cvv" class="form-control" placeholder="" autocomplete="off">
                 </div>
             </div>
-        </div>
-        <div class="mt-2">
-            <button type="submit" class="btn btn-primary" id="btn-checkout" onclick="return confirm('Bạn có chắc chắn mua hàng?')">Thanh toán</button>
-        </div>
+        </div> --}}
+        <button type="submit" class="btn btn-primary" id="btn-checkout" onclick="return confirm('Bạn có chắc chắn mua hàng?')">Thanh toán</button>
     </form>
 </div>

@@ -50,9 +50,9 @@
                     <tr>
                         <td>{{ $key+1 }}</td>
                         <td>{{ $category->name }}</td>
-                        <td><a href="{{ route('admin.product.index', ['category_id' => $category->id]) }}">View List Product</a></td>
-                        <td><a href="{{ route('admin.category.show', $category->id) }}">Detail</a></td>
-                        <td><a href="{{ route('admin.category.edit', $category->id) }}">Edit</a></td>
+                        <td><a href="{{ route('admin.product.index', ['category_id' => $category->id]) }}" class="btn btn-default">View List Product</a></td>
+                        <td><a href="{{ route('admin.category.show', $category->id) }}" class="btn btn-primary">Detail</a></td>
+                        <td><a href="{{ route('admin.category.edit', $category->id) }}" class="btn btn-warning">Edit</a></td>
                         <td>
                             <form action="{{ route('admin.category.destroy', $category->id) }}" method="post">
                                 @csrf

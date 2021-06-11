@@ -17,8 +17,8 @@ class OrderDetail extends Model
     protected $fillable = [
         'product_id',
         'order_id',
-        'price_id',
         'quantity',
+        'price',
     ];
 
     /**
@@ -37,11 +37,4 @@ class OrderDetail extends Model
         return $this->belongsTo(Product::class, 'product_id', 'id');
     }
 
-    /**
-     * one Order_Detail belongsTo one Price
-     */
-    public function price()
-    {
-        return $this->belongsTo(Price::class, 'price_id', 'id');
-    }
 }

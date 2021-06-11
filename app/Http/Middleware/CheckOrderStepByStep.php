@@ -22,9 +22,9 @@ class CheckOrderStepByStep
         $stepByStep = empty($sessionAll['step_by_step']) ? null : $sessionAll['step_by_step'];
         // check if current route is /cart then redirect to cart
         if ($stepByStep == 1 && !in_array(Route::currentRouteName(), ['cart.cart-info'])) {
-            return redirect()->route('cart.cart-info');
+            return redirect()->route('cart.cart-info');//đã login
         } else if ($stepByStep == 2 && !in_array(Route::currentRouteName(), ['cart.checkout'])) { // check if current route is /cart/checkout then redirect to cart/checkout
-            return redirect()->route('cart.checkout');
+            return redirect()->route('cart.checkout');//chưa login
         }
 
         return $next($request);

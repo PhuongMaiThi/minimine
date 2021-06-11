@@ -16,15 +16,12 @@ class CreateOrderDetailsTable extends Migration
         Schema::create('order_details', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('product_id');
-
             $table->unsignedBigInteger('order_id');
-            $table->unsignedBigInteger('price_id');
             $table->integer('quantity');
             $table->timestamps();
             $table->softDeletes();
         });
     }
-
     /**
      * Reverse the migrations.
      *

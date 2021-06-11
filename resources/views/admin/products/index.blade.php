@@ -21,11 +21,7 @@
 
 @section('content')
     {{-- form search --}}
-    @include('admin.products._search')
-
-    {{-- create product link --}}
-    <p><a href="{{ route('admin.product.create') }}" class="btn btn-primary" title="Create Product">Create</a></p>
-  
+    @include('admin.products._search')  
 
     {{-- show message --}}
     @if(Session::has('success'))
